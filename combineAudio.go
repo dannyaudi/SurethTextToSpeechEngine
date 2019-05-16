@@ -11,7 +11,7 @@ import (
 // It iterates over the list, combining the next clip with the base clip, or "streamer".
 // The file is written to the same directory under the name "output.wav"
 
-func combineAudio(paths []string) {
+func combineAudio(paths []string, output string) {
 
 	f, _ := os.Open(paths[0])
 	streamerBase, format, _ := wav.Decode(f)
@@ -28,7 +28,7 @@ func combineAudio(paths []string) {
 		streamerFinal = beep.Seq(streamerFinal, streamerTemp)
 	}
 
-	writer, _ := os.Create("output.wav")
+	writer, _ := os.Create(output) //temporarily changed from output.wav to output variable
 
 	wav.Encode(writer, streamerFinal, format)
 }
